@@ -8,7 +8,7 @@ eureka:
     prefer-ip-address: true
 
 spring:
-  application.name: 'empty-service'
+  application.name: 'order-service'
   security:
     oauth2:
       resourceserver:
