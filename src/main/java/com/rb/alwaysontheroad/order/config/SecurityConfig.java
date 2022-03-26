@@ -1,4 +1,4 @@
-package com.rb.alwaysontheroad.empty.config;
+package com.rb.alwaysontheroad.order.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
