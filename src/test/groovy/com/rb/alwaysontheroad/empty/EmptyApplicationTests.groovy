@@ -1,4 +1,4 @@
-package com.rb.alwaysontheroad.order;
+package com.rb.alwaysontheroad.metricsadapter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

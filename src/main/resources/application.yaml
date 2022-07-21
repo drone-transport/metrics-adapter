@@ -1,16 +1,31 @@
-server.port: 9090
+server.port: 8080
 
-eureka:
-  client:
-    registry-fetch-interval-seconds: 30
-  instance:
-    prefer-ip-address: true
-
-management:
-  endpoints.web.exposure.include: '*'
-  endpoint:
-    logfile:
-      external-file: ./logs/service.log
-      enabled: true
-    health.show-details: always
-    loggers.enabled: true
+spring:
+  cloud:
+    function:
+      definition: physicalMetricsProducer;physicalMetricsConsumer
+    stream:
+      default-binder: kafka
+      bindings:
+        physicalMetricsProducer-out-0:
+          destination: metrics-topic
+          content-type: application/json
+        physicalMetricsConsumer-in-0:
+          group: metrics
+          destination: metrics-topic
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: kafka-cluster.drone-transport:9092
+          auto-create-topics: true
+          min-partitionCount: 3
+          replication-factor: 3
+        streams:
+          binder:
+            producer-properties:
+              key.serializer: org.apache.kafka.common.serialization.StringSerializer
+              value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
+            consumer-properties:
+              spring.json.trusted.packages: '*'
+              key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+              value.deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

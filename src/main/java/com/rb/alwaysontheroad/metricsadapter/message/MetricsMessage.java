@@ -1,4 +1,4 @@
-package com.rb.alwaysontheroad.order.api.dto;
+package com.rb.alwaysontheroad.metricsadapter.message;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,9 @@ import java.util.UUID;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class OrderCreteResponse {
+public class MetricsMessage implements Identifiable {
 
-    private UUID orderId;
+    private UUID droneId;
+
+    private Double speed;
 }
